@@ -59,7 +59,6 @@
 			}
 		}
 	}
-	return;
 	$output = str_replace("\/", "/", json_encode($repo_mapping));
 
 	file_put_contents("repo_mapping.json", $output);
