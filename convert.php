@@ -47,9 +47,11 @@
 					$data->fork_policy = $repository->fork_policy;
 					$data->website = $repository->website;
 					$data->description = $repository->description;
-					$data->name = $repository->name;
+					$data->name = $repository->name . "-git";
 					$data->language = $repository->language;
 					$data->project = $arrayName = array('key' => $repository->project->key);
+
+					echo "curl -X POST -H \"Content-Type: application/json\" -d '" . json_encode($data) . "' --user " . $user . ":'" . $password . "' 'https://api.bitbucket.org/2.0/repositories/" . $org . "/" . $repository->slug . "-git'" . "\r\n";
 
 					// Create git repo
 					exec("curl -X POST -H \"Content-Type: application/json\" -d '" . json_encode($data) . "' --user " . $user . ":'" . $password . "' 'https://api.bitbucket.org/2.0/repositories/" . $org . "/" . $repository->slug . "-git'");
@@ -57,6 +59,7 @@
 			}
 		}
 	}
+	return;
 	$output = str_replace("\/", "/", json_encode($repo_mapping));
 
 	file_put_contents("repo_mapping.json", $output);
@@ -68,7 +71,6 @@
 	exec('python hg-export-tool/exporter.py repo_mapping.json -A authors.map', $output, $return);
 
 	if ($return != 0) {
-		echo $output;
 		echo "hg-export-tool failed, check output";
 		return;
 	}
@@ -81,9 +83,9 @@
 		exec("cd git/" . $slug . " && git remote add origin git@bitbucket.org:" . $org . "/" . $slug . "-git.git");
 
 		// Push master
-		exec("cd git/" . $slug . " && git push -u origin master");
+		//exec("cd git/" . $slug . " && git push -u origin master");
 
 		// Push tags
-		exec("cd git/" . $slug . " && git push --tags origin");
+		//exec("cd git/" . $slug . " && git push --tags origin");
 	}
 ?>
