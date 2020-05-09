@@ -1,0 +1,5 @@
+hg/
+git/
+config.json
+repo_mapping.json
+authors.map

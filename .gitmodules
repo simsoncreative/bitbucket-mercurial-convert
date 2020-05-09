@@ -1,0 +1,3 @@
+[submodule "hg-export-tool"]
+	path = hg-export-tool
+	url = https://github.com/chrisjbillington/hg-export-tool.git
