@@ -82,9 +82,9 @@
 		exec("cd git/" . $slug . " && git remote add origin git@bitbucket.org:" . $org . "/" . $slug . "-git.git");
 
 		// Push master
-		//exec("cd git/" . $slug . " && git push -u origin master");
+		exec("cd git/" . $slug . " && git push -u origin master");
 
 		// Push tags
-		//exec("cd git/" . $slug . " && git push --tags origin");
+		exec("cd git/" . $slug . " && git push --tags origin");
 	}
 ?>
