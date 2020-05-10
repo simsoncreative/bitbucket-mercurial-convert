@@ -51,8 +51,6 @@
 					$data->language = $repository->language;
 					$data->project = $arrayName = array('key' => $repository->project->key);
 
-					echo "curl -X POST -H \"Content-Type: application/json\" -d '" . json_encode($data) . "' --user " . $user . ":'" . $password . "' 'https://api.bitbucket.org/2.0/repositories/" . $org . "/" . $repository->slug . "-git'" . "\r\n";
-
 					// Create git repo
 					exec("curl -X POST -H \"Content-Type: application/json\" -d '" . json_encode($data) . "' --user " . $user . ":'" . $password . "' 'https://api.bitbucket.org/2.0/repositories/" . $org . "/" . $repository->slug . "-git'");
 				}
